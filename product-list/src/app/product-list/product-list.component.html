@@ -1,0 +1,114 @@
+<div class="container">
+  <form novalidate [formGroup]="form">
+    <h2>Product List</h2>
+    <br>
+    <div class="row">
+      <div class="col-sm-8">
+        <button *ngIf="true" type="button" class="btn btn-primary" (click)="addCreds()" [disabled]="disable">Add+</button>
+      </div>
+      <!-- <div class="col-sm-4">
+        <button type="button" class="btn btn-primary" (click)="creds.removeAt(-1)">Remove</button>
+      </div> -->
+    </div>
+
+
+    <div formArrayName="entries" *ngFor="let item of form.get('entries').controls; let i = index; trackBy:trackByFn">
+      <ng-container [formGroupName]="i">
+        <br>
+        <div class="row">
+           <!-- <h4>{{i+1}}</h4>  -->
+          <div class="col-sm-3">
+
+            <input placeholder="Product Name" formControlName="name" type="text" name="name" maxlength="30" minlength="4" required>
+            <div *ngIf="this.form.get('entries').controls[i].controls.name.errors">
+              <p *ngIf="this.form.get('entries').controls[i].controls.name.errors.required" class="alert alert-danger">
+                <small>Error: Name is required</small>
+              </p>
+              <p *ngIf="this.form.get('entries').controls[i].controls.name.errors.minlength" class="alert alert-warning">
+                <small>Error: Atleast 4 characters</small>
+              </p>
+              <p *ngIf="this.form.get('entries').controls[i].controls.name.errors.maxlength" class="alert alert-warning">
+                <small>Error: Atmost 30 characters</small>
+              </p>
+            </div>
+
+          </div>
+          <div class="col-sm-3">
+            <input placeholder="Product SKU" formControlName="SKU" type="text" name="SKU" maxlength="30" minlength="1" required>
+            <div *ngIf="this.form.get('entries').controls[i].controls.SKU.errors">
+              <p *ngIf="this.form.get('entries').controls[i].controls.SKU.errors.required" class="alert alert-danger">
+                <small>Error: SKU is required</small>
+              </p>
+              <p *ngIf="this.form.get('entries').controls[i].controls.SKU.errors.minlength" class="alert alert-warning">
+                <small>Error: Atleast 5 characters</small>
+              </p>
+              <p *ngIf="this.form.get('entries').controls[i].controls.SKU.errors.maxlength" class="alert alert-warning">
+                <small>Error: Atmost 30 characters</small>
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <input placeholder="Product Quantity" formControlName="quantity" type="number" name="quantity" maxlength="30" minlength="1" required>
+          </div>
+
+          <div class="col-sm-3">
+            <button type="button" class="close" aria-label="Close" (click)="removeProduct(i)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <hr>
+      </ng-container>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-8">
+        <button class="btn btn-success" (click)="productSave()" [disabled]="!this.form.valid">Add Products</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">
+        <h3> Product Name</h3>
+      </div>
+      <div class="col-sm-3">
+        <h3> Product SKU</h3>
+      </div>
+      <div class="col-sm-2">
+        <h3>Product Quantity</h3>
+      </div>
+      <div class="col-sm-2">
+        <h3>Date</h3>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="response">
+      <div *ngFor="let res of response; let i = index;">
+        <div class="row">
+          <div class="col-sm-3">
+            {{res.name}}
+          </div>
+          <div class="col-sm-3">
+            {{ res.SKU }}
+          </div>
+          <div class="col-sm-2">
+            {{ res.quantity }}
+          </div>
+          <div class="col-sm-2">
+            {{ todaydate | date }}
+          </div>
+          <div class="col-sm-1">
+            <a (click)="deleteProduct(res.SKU)">Delete</a>
+          </div>
+          <div class="col-sm-1">
+            <a (click)="editProduct(res.SKU)">Edit</a>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+
+
+  </form>
+</div>

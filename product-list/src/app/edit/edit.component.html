@@ -1,0 +1,30 @@
+<!-- 
+<form [formGroup]="editForm" (ngSubmit)="submitHandler()">
+  <b>ProductName:</b><input class="field"type="text" pattern="[a-zA-Z\s]+" maxlength="20" placeholder="Enter Product Name" formControlName = "name"><br>
+  <span class="msg">*Require and accepts alphabets only</span>
+  <br><br><b>ProductSKU</b><input class="field"type=" text " pattern="[a-zA-Z0-9\s]+" maxlength="10"placeholder="SKU" formControlName = "SKU" disabled><br>
+  <br><br><b>ProductQuantity</b><input class="no_field"input type="text" pattern="\d*" maxlength="6" placeholder=" Enter Quantity" formControlName = "quantity"><br>
+  <span class="msg">*Require and Must a Number</span><br>
+  <input class="btn" type="submit" value="Edit Product" >
+  <input class="btn" type="button" value="Cancel" (click)="cancel()" >
+</form> -->
+
+<div class="container">
+<div class="card" style="background-color:gray">
+  <form [formGroup]="editForm" (ngSubmit)="submitHandler()">
+    <div class="container">
+      <div class="col">
+        <h3>Product</h3>
+        <input class="field" type="text" pattern="[a-zA-Z\s]+" maxlength="20" placeholder="Enter Product Name" formControlName="name"><br><br>
+        <input class="field" type=" text " pattern="[a-zA-Z0-9\s]+" maxlength="10" placeholder="SKU" formControlName="SKU" disabled><br><br>
+        <input class="no_field" input type="text" pattern="\d*" maxlength="6" placeholder=" Enter Quantity" formControlName="quantity"><br>
+        <br>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-success">Edit Product</button>&nbsp;
+        <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+      </div><br>
+     
+    </div>
+  </form></div>
+</div>
